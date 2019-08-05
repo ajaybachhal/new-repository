@@ -1,0 +1,36 @@
+.new1{
+    margin-top: 70px;
+ 
+
+}
+.img-cardnew{
+    margin-left: 0px;
+}
+.hello-there{
+    margin-bottom: 0px;
+}
+.new13{
+    margin-left: 120px;
+}
+.new14{
+    margin-left: 345px;
+
+}
+.new15{
+    margin-left: 40px;
+    margin-top: 0px
+}
+
+.remove{
+    color:#A95013;
+}
+
+.enlarge:hover{
+width:103%;
+
+background-color:#E7E6E5;
+}
+.shad:hover{
+    box-shadow: 2px 2px 8px skyblue;
+    cursor:pointer;
+}
