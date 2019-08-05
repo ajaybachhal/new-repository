@@ -1,0 +1,173 @@
+<ngx-spinner></ngx-spinner>
+
+<div class="row" *ngIf="productData" style="position: relative; margin-top: 100px;">
+  <div class="col-md-6 offset-1">
+    
+     <h5 class="text-secondary" >My Cart({{productData.length}})</h5>
+    <hr>
+  <div *ngFor="let product of productData;let i=index" class="card mb-3 shad">
+    
+    <div class="row ">
+        
+      <div class="col-md-4" style="margin-left: 15px">
+        <br>
+        <div *ngIf="product.pSeller.pDiscount" style="padding-left: 2px" >
+            <h6><span class="badge badge-success">On Offer</span> </h6>
+            </div>
+            <div class="container" style="padding-left: 35px">
+                <img class="card-img-top img-fluid" style="width: 150px;height: 170px" [src]="'/assets/img/'+product.image">
+                
+            </div>
+        
+            
+        
+      </div>
+    
+      <div class="col-md-6 offset-md-1">
+        <br>
+        <a routerLink="/productDetail/{{product._id}}"><h5 class="font-weight-bold">{{product.pName}}</h5> </a>
+        <span class="badge badge-pill badge-warning">{{product.pRating}}  &#x2606; </span> &nbsp; <span class="badge badge-pill badge-dark">Hoopla's &nbsp;<span class="text-warning">Choice</span> </span>
+       
+        
+        <h6 style="padding-top: 5px" class="text-secondary font-weight-normal">Quantity Left : {{product.pSeller.pQuantity}}</h6>
+        <h6 class="text-secondary font-weight-normal">
+          Delivery in 7 bussiness days
+        </h6>
+        
+        <h6> <hr>{{product.price*product.qty | currency:'INR'}} &nbsp; <span class="text-muted"><s>{{(product.price +(product.price*product.pSeller.pDiscount))*product.qty | currency:'INR'}}</s> </span> 
+        &nbsp;<span class="text-success"> {{product.pSeller.pDiscount*100}}% Off</span> &nbsp; 
+        
+        <hr>
+        </h6>
+        <div>
+
+        
+        
+        
+        
+        <span  class="text-danger font-weight-bold" *ngIf="product.qty>product.pSeller.pQuantity" >Sorry! we have only {{product.pSeller.pQuantity}} stock left.</span>
+        
+        <br> 
+      </div>
+
+      </div>
+
+      
+    </div> 
+    <div class="row">
+
+      <div class="col-md-4" style="margin-left: 15px">
+          <div style="padding-left: 20px">
+                
+              
+              <span class="ui-float-label">
+                  <input id="float-input" type="number" size="30" min="1" [(ngModel)]="product.qty"  (change)="dataUpdate(product,product.qty); qtyChange(i,product,product.qty)" pInputText> 
+                  <label for="float-input">Quantity</label>
+              </span>
+              <!-- (keyup)="qtyError(product.qty,product.pSeller.pQuantity)" -->
+              <br>
+      </div>
+      </div>
+
+      <div class="col-md-6 offset-md-1">
+      
+        
+        <button class="btn btn-danger btn-block" (click)="removeCart(product._id)" >
+          <i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Remove
+        </button>
+        
+      </div>
+
+    </div>
+  </div> 
+</div>
+
+ 
+      <div class="col-md-4 " *ngIf="productData.length>0">
+          <h5 class="text-secondary">Price Details</h5>
+          <hr>
+        <div class="card shad" >
+          
+            <div style="padding: 15px">
+              
+              <div class="row">
+                 <div class="col-md-5">
+                    <h6>Cart Total(MRP)</h6>
+                 </div>
+                 <div class="col-md-4 offset-md-3">
+                  <h6 class="text-right"> {{price1| currency:'INR'}}</h6>
+                 </div>
+                   
+              </div>
+              
+              
+              
+              <hr>
+              <div class="row">
+                  <div class="col-md-6">
+                     <h6>Total Tax(17% by default)</h6>
+                  </div>
+                  <div class="col-md-4 offset-md-2">
+                   <h6 class="text-right"> {{taxprice1 | currency:'INR'}}</h6>
+                  </div>
+                    
+               </div>
+            
+                
+              <hr>
+
+              <div class="row">
+                  <div class="col-md-5">
+                     <h6>Cart Total(MRP)</h6>
+                  </div>
+                  <div class="col-md-4 offset-md-3">
+                   <h6 class="text-right"> {{ finalprice | currency:'INR'}}</h6>
+                  </div>
+                    
+               </div>
+                 
+                
+              <hr> 
+              
+              <div class="row">
+                  <div class="col-md-10 offset-md-1">
+                      <button type="button" class="btn btn-success btn-block " [disabled]="!qtyboolean" (click)="Checkout()" ><span class="font-weight-normal">Check Out</span> </button>
+                  </div>
+                  
+               </div>  
+                 
+                </div>    
+          
+        </div>
+        <br>
+        <br>
+        <div class="row">
+          
+          <div class="col-md-1 offset-md-1">
+             <i class="fa fa-shield fa-2x"  aria-hidden="true"></i> 
+          </div>
+          <div class="col-md-10 " >
+            
+            <h6 class="text-muted font-weight-bold text-center">Safe & Secure Payments.Easy returns.100% Authantic products.</h6>
+            
+          </div>
+
+        </div>
+        <div class="text-danger" *ngIf="errorMessage1">{{errorMessage1}}</div>
+          <!-- <div *ngFor = "let data of cartArray">
+            {{data|json}}
+          </div> -->
+      </div>
+</div>
+<br>
+<br>
+<br>
+
+<hr>
+    <div>
+      
+      <h6 class="text-muted text-center">&#9400; 2019 hoopla.com</h6>
+      <br>
+    </div>
+        
+         
